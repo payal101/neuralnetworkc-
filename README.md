@@ -15,7 +15,7 @@ Implement gradient descent manually
 
 Gain confidence in building ML systems at a low level using C++
 
-Features
+**Features**
 
 Fully connected feedforward neural network
 
@@ -30,8 +30,8 @@ Gradient descent optimization
 Configurable network architecture (layers, neurons)
 
 Trained and tested on logical datasets such as XOR
-
-Tech Stack
+**
+Tech Stack**
 
 Language: C++
 
@@ -83,8 +83,8 @@ Importance of weight initialization and learning rate
 Numerical stability and floating-point precision in C++
 
 Writing modular, readable code for complex systems
-
-Limitations
+**
+Limitations**
 
 Not optimized for large datasets
 
