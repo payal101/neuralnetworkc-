@@ -83,28 +83,16 @@ Importance of weight initialization and learning rate
 Numerical stability and floating-point precision in C++
 
 Writing modular, readable code for complex systems
-**
-Limitations**
 
-Not optimized for large datasets
 
-No GPU acceleration
 
-Intended for learning and experimentation, not production use
 
-Future Improvements
-
-Add support for different activation functions
-
-Extend to multi-class classification
-
-Implement optimizers like Momentum or Adam
-
-Compare performance with library-based implementations
-
-How to Run
+**How to Run**
 g++ nn_xor.cpp -o nn_xor
 ./nn_xor
+**Helpful Links**
+
+https://home.agh.edu.pl/~vlsi/AI/xor_t/en/main.htm?source=post_page-----83e35a22c96f---------------------------------------
 
 Project Status
 
