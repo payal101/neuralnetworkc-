@@ -30,8 +30,7 @@ Gradient descent optimization
 Configurable network architecture (layers, neurons)
 
 Trained and tested on logical datasets such as XOR
-**
-Tech Stack**
+**Tech Stack**
 
 Language: C++
 
