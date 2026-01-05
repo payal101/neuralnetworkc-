@@ -1,6 +1,6 @@
 # XOR Neural Network in C++
 
-A **feedforward neural network implemented from scratch in C++** to solve the XOR problem using **sigmoid activation**, **backpropagation**, and **gradient descent**.
+A **feedforward neural network implemented from scratch in C++** to solve the XOR problem using **sigmoid activation** and **gradient descent**.
 
 ---
 
@@ -24,43 +24,51 @@ $$
 \sigma(z) = \frac{1}{1 + e^{-z}}
 $$
 
-which introduces non-linearity, allowing the network to model XOR.
-
 ---
 
 ## Forward Pass
 
-Let the input vector be 
+Let the input vector be:
+
 $$
-\mathbf{x} = \begin{bmatrix} x_1 \\ x_2 \end{bmatrix}
-$$, weights $$\mathbf{W}^{(1)} \in \mathbb{R}^{2\times2}$, biases $\mathbf{b}^{(1)} \in \mathbb{R}^{2}$$ for the hidden layer, and $$\mathbf{W}^{(2)} \in \mathbb{R}^{1\times2}$$, $$b^{(2)} \in \mathbb{R}$$for the output layer.  
+\mathbf{x} = 
+\begin{bmatrix} 
+x_1 \\ 
+x_2 
+\end{bmatrix}, \quad
+\mathbf{W}^{(1)} \in \mathbb{R}^{2 \times 2}, \quad
+\mathbf{b}^{(1)} \in \mathbb{R}^{2}, \quad
+\mathbf{W}^{(2)} \in \mathbb{R}^{1 \times 2}, \quad
+b^{(2)} \in \mathbb{R}
+$$
 
 Hidden layer activations:
 
 $$
-\mathbf{h} = \sigma(\mathbf{W}^{(1)} \mathbf{x} + \mathbf{b}^{(1)})
+\mathbf{h} = \sigma \big( \mathbf{W}^{(1)} \mathbf{x} + \mathbf{b}^{(1)} \big)
 $$
 
 Output:
 
 $$
-\hat{y} = \sigma(\mathbf{W}^{(2)} \mathbf{h} + b^{(2)})
+\hat{y} = \sigma \big( \mathbf{W}^{(2)} \mathbf{h} + b^{(2)} \big)
 $$
 
 ---
 
 ## Loss Function
 
-We use **binary cross-entropy**:
+We use **mean squared error (MSE)** (matches your code implementation):
 
 $$
-\mathcal{L}(y, \hat{y}) = - \big[ y \log(\hat{y}) + (1-y) \log(1-\hat{y}) \big]
+\mathcal{L}(y, \hat{y}) = \frac{1}{2} (\hat{y} - y)^2
 $$
 
-Training objective over all 4 XOR inputs $(\mathbf{x}^{(i)}, y^{(i)})$:
+The **training objective** over all 4 XOR inputs $(\mathbf{x}^{(i)}, y^{(i)})$:
 
 $$
-\min_{\mathbf{W}^{(1)}, \mathbf{b}^{(1)}, \mathbf{W}^{(2)}, b^{(2)}} \sum_{i=1}^{4} \mathcal{L}(y^{(i)}, \hat{y}^{(i)})
+\min_{\mathbf{W}^{(1)}, \mathbf{b}^{(1)}, \mathbf{W}^{(2)}, b^{(2)}} 
+\sum_{i=1}^{4} \mathcal{L}(y^{(i)}, \hat{y}^{(i)})
 $$
 
 ---
@@ -82,7 +90,7 @@ $$
 
 $$
 \delta^{(1)} = (\mathbf{W}^{(2)})^\top \delta^{(2)} \odot \sigma'(\mathbf{h}), \quad
-\sigma'(\mathbf{h}) = \mathbf{h} \odot (1-\mathbf{h})
+\sigma'(\mathbf{h}) = \mathbf{h} \odot (1 - \mathbf{h})
 $$
 
 $$
@@ -103,11 +111,17 @@ where $\eta$ is the **learning rate**.
 
 ## Example Output
 0 XOR 0 ≈ 0.01
+
 0 XOR 1 ≈ 0.99
+
 1 XOR 0 ≈ 0.98
+
 1 XOR 1 ≈ 0.02
-
-
 The network successfully approximates the XOR function.
 
 
+## How to Run
+
+```bash
+g++ nn_xor -o nn_xor -std=c++11
+./nn_xor.exe
