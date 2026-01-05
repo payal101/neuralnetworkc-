@@ -1,100 +1,67 @@
-Neural Network from Scratch in C++
-Overview
+# XOR Neural Network in C++  
 
-This project implements a fully connected neural network from scratch in C++, without using any machine learning libraries.
-The goal was to deeply understand how neural networks work internally by manually implementing the mathematical and algorithmic components.
+A **feedforward neural network implemented from scratch in C++** to solve the classic XOR problem using **sigmoid activation**, **backpropagation**, and **gradient descent**.
 
-Motivation
+---
 
-Most ML frameworks abstract away the learning process.
-This project was built to:
+## Project Overview
 
-Understand forward propagation and backpropagation mathematically
+The XOR problem is **non-linearly separable**, making it a canonical example for neural network learning. This implementation demonstrates how a network can approximate a function \( f: \mathbb{R}^2 \to \mathbb{R} \) mapping binary inputs to outputs.  
 
-Implement gradient descent manually
+**Network architecture:**
 
-Gain confidence in building ML systems at a low level using C++
+- Input layer: \( x \in \mathbb{R}^2 \)  
+- Hidden layer: 2 neurons (\( h_1, h_2 \))  
+- Output layer: 1 neuron (\( \hat{y} \in [0,1] \))  
 
-**Features**
+The network uses **sigmoid activation**:  
 
-Fully connected feedforward neural network
+\[
+\sigma(z) = \frac{1}{1 + e^{-z}}
+\]  
 
-Manual implementation of:
+to introduce non-linearity and allow modeling of XOR.
 
-Forward propagation
+---
 
-Backpropagation
+## Mathematical Formulation
 
-Gradient descent optimization
+1. **Forward Pass:**
 
-Configurable network architecture (layers, neurons)
+\[
+h_j = \sigma\left(\sum_{i=1}^{2} w_{ij}^{(1)} x_i + b_j^{(1)}\right), \quad j = 1,2
+\]  
 
-Trained and tested on logical datasets such as XOR
-**Tech Stack**
+\[
+\hat{y} = \sigma\left(\sum_{j=1}^{2} w_j^{(2)} h_j + b^{(2)}\right)
+\]  
 
-Language: C++
+where \( w_{ij}^{(1)}, w_j^{(2)} \) are weights and \( b_j^{(1)}, b^{(2)} \) are biases.
 
-Libraries: Standard C++ STL only
+2. **Loss Function (Binary Cross-Entropy):**
 
-No external ML frameworks used
+\[
+\mathcal{L}(y, \hat{y}) = - \big[ y \log(\hat{y}) + (1 - y) \log(1 - \hat{y}) \big]
+\]  
 
-Network Architecture
+3. **Backpropagation (Gradient Descent):**
 
-Input Layer
+\[
+w \gets w - \eta \frac{\partial \mathcal{L}}{\partial w}, \quad
+b \gets b - \eta \frac{\partial \mathcal{L}}{\partial b}
+\]  
 
-One or more Hidden Layers
+where \( \eta \) is the **learning rate**.
 
-Output Layer
+4. **Training Objective:**  
 
-Activation functions implemented manually
+Minimize the total loss over all 4 XOR inputs:
 
-Loss computed and minimized using gradient descent
+\[
+\min_{w,b} \sum_{(x,y)\in \text{XOR}} \mathcal{L}(y, \hat{y})
+\]
 
-Training Process
+---
 
-Initialize weights and biases randomly
-
-Perform forward propagation to compute predictions
-
-Calculate error using loss function
-
-Apply backpropagation to compute gradients
-
-Update weights using gradient descent
-
-Repeat over multiple epochs
-
-Example Output
-0 XOR 0 = 0.04
-0 XOR 1 = 0.85
-1 XOR 0 = 0.85
-1 XOR 1 = 0.06
-
-
-(Values approximate correct XOR behavior)
-
-What I Learned
-
-How neural networks learn at a mathematical level
-
-Importance of weight initialization and learning rate
-
-Numerical stability and floating-point precision in C++
-
-Writing modular, readable code for complex systems
-
-
-
-
-**How to Run**
-g++ nn_xor.cpp -o nn_xor
-./nn_xor
-**Helpful Links**
-
-https://home.agh.edu.pl/~vlsi/AI/xor_t/en/main.htm?source=post_page-----83e35a22c96f---------------------------------------
-
-Project Status
-
- Completed core implementation
- Open to future extensions
+## Example Output
 
